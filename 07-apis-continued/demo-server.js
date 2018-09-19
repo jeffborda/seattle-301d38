@@ -19,7 +19,7 @@ app.get('/location', (request, response) => {
   searchToLatLong(request.query.data)
     .then(location => response.send(location))
     .catch(error => handleError(error, response));
-})
+});
 
 // Dark Skies / weather
 app.get('/weather', getWeather);
@@ -37,8 +37,8 @@ function searchToLatLong(query) {
         search_query: query,
         formatted_query: res.body.results[0].formatted_address,
         latitude: res.body.results[0].geometry.location.lat,
-        longitude: res.body.results[0].geometry.location.lng
-      }
+        longitude: res.body.results[0].geometry.location.lng,
+      };
     })
     .catch(error => handleError(error));
 }
@@ -49,18 +49,18 @@ function getWeather(request, response) {
   // superagent request
   return superagent.get(url)
   // .then handle results, massage data
-  .then( result => {
+    .then( result => {
     // console.log(result.body.daily.data, 'result of DarkSky request');
-    const weatherSummaries = [];
-    result.body.daily.data.forEach( day => {
-      const summary = new Weather(day);
-      weatherSummaries.push(summary);
-    });
-    // send back to the browser
-    response.send(weatherSummaries)
-  })
-  .catch( error => handleError(error, response));
-  
+      const weatherSummaries = [];
+      result.body.daily.data.forEach( day => {
+        const summary = new Weather(day);
+        weatherSummaries.push(summary);
+      });
+      // send back to the browser
+      response.send(weatherSummaries);
+    })
+    .catch( error => handleError(error, response));
+
 }
 
 function handleError(err, res) {
