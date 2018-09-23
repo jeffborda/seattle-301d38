@@ -9,6 +9,7 @@ Today is the first day of our new project, a mobile-only book collection. You wi
 - Warm-up exercise
 - Review code challenges
 - Full-stack application skeleton scaffolding
+- HTML5 Forms
 - Server-side templating
 - Google Books API
 - Code Demo
